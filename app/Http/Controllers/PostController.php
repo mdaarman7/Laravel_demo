@@ -1,18 +1,38 @@
-<?php 
+<?php
+namespace App\Http\Controllers;
 
-use app\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+// use Illuminate\Support\Facades\Request;
 
-// class PostController extends Controller
-// {
-//     public function index()
-//     {   
-//         $posts = Auth::user()->posts()->paginate(10);
-//         return view("        ", compact(""));
+class PostController extends Controller
+{
+    public function index()
+    {
+        return "Hello, World!";
+    }
+    public function create()
+    {
+        //form to insert data
+    }
+    public function store()
+    {
+        //(Form handling)
+    }
+    public function show($id)
+    {
+        //show single data
+    }
+    public function edit($id)
+    {
+        //form edit
+    }
+    public function update($id)
+    {
+        //update data
+    }
+    public function destroy($id)
+    {
+        //delete data
+    }
 
-//     }
-//     public function create()
-//     {
-//         return view("");
-//     }
-// }
+}

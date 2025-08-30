@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,10 +61,10 @@ Route::prefix('admin')->middleware('/auth')->group(function () {        // middl
 });
 
 // Fallback Route
-Route::fallback(function () {
-    // return '404 Not Found. Go back to <a href="/">Home</a>';
-    return view('errors.404');
-});
+// Route::fallback(function () {
+//     // return '404 Not Found. Go back to <a href="/">Home</a>';
+//     return view('errors.404');
+// });
 
 // Route::get('/post', [PostController::class, 'index'])->name('post.index');
 // Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
@@ -74,15 +74,20 @@ Route::fallback(function () {
 // Route::put('/post/{id}', [PostController::class, 'update'])->name('post.update');
 // Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
 
-// Route::resource('post', PostController::class);
-// Route::resource('post', PostController::class)->only([
-//     'index', 'show', 'create', 'store', 'edit'
-// ]);
+Route::resource('post', PostController::class);   // all routes
 
-// Route::resource('post', PostController::class)->except([
-//     'update', 'destroy'
-// ]);
 
+// Only specific routes
+Route::resource('post', PostController::class)->only([
+    'index', 'show', 'create', 'store', 'edit'
+]);
+
+// Exclude specific routes
+Route::resource('post', PostController::class)->except([
+    'update', 'destroy'
+]);
+
+// Using Route::controller method for grouping post controller routes
 // Route::controller(PostController::class)->group(function () {
 //     Route::get('/post', 'index')->name('post.index');
 //     Route::get('/post/create', 'create')->name('post.create');
@@ -92,4 +97,5 @@ Route::fallback(function () {
 //     Route::put('/post/{id}', 'update')->name('post.update');
 //     Route::delete('/post/{id}', 'destroy')->name('post.destroy');
 // });
+
 
