@@ -14,30 +14,32 @@ Route::get('/about', function () {
 
 
 
+
+
 // Named Paramater Route
 // Route::get('user/{id}', function ($id) {
 //     return 'User '.$id;
 // })->name('user.show');
 
-// Grouping Routes
-Route::prefix('admin')->group(function () {
-    Route::get('/users', function () {
-        return 'Admin Users';
-    });    
-    Route::get('/posts', function () {
-        return 'Admin Posts';
-    }); 
-});
+// // Grouping Routes
+// Route::prefix('admin')->group(function () {
+//     Route::get('/users', function () {
+//         return 'Admin Users';
+//     });    
+//     Route::get('/posts', function () {
+//         return 'Admin Posts';
+//     }); 
+// });
 
 // constraints
 
-Route::get('/user/{ids}', function ($ids){
-    return 'User '.$ids;
-})->where('ids','[0-9]+'); // only numbers
+// Route::get('/user/{ids}', function ($ids){
+//     return 'User '.$ids;
+// })->where('ids','[0-9]+'); // only numbers
 
-Route::get('/user/{slug}', function ($slug){
-    return 'Post with slug '.$slug;
-})->where('slug','[A-Za-z0-9-_]+'); // only letters
+// Route::get('/user/{slug}', function ($slug){
+//     return 'Post with slug '.$slug;
+// })->where('slug','[A-Za-z0-9-_]+'); // only letters
 
 
 // // middleware
@@ -77,15 +79,15 @@ Route::prefix('admin')->middleware('/auth')->group(function () {        // middl
 Route::resource('post', PostController::class);   // all routes
 
 
-// Only specific routes
-Route::resource('post', PostController::class)->only([
-    'index', 'show', 'create', 'store', 'edit'
-]);
+// // Only specific routes
+// Route::resource('post', PostController::class)->only([
+//     'index', 'show', 'create', 'store', 'edit'
+// ]);
 
-// Exclude specific routes
-Route::resource('post', PostController::class)->except([
-    'update', 'destroy'
-]);
+// // Exclude specific routes
+// Route::resource('post', PostController::class)->except([
+//     'update', 'destroy'
+// ]);
 
 // Using Route::controller method for grouping post controller routes
 // Route::controller(PostController::class)->group(function () {
@@ -98,4 +100,6 @@ Route::resource('post', PostController::class)->except([
 //     Route::delete('/post/{id}', 'destroy')->name('post.destroy');
 // });
 
+Route::get('/index', [PostController::class, 'create'])->name('index.create');
+Route::post('/index', [PostController::class, 'store'])->name('index.store');
 

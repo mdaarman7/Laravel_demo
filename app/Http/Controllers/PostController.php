@@ -2,6 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
+
 // use Illuminate\Support\Facades\Request;
 
 class PostController extends Controller
@@ -13,10 +16,27 @@ class PostController extends Controller
     public function create()
     {
         //form to insert data
+        return view('index'); // loads resources/views/index.blade.php
+
     }
-    public function store()
+    public function store(Request $request)
     {
-        //(Form handling)
+        // dd(request()->all());
+        // Input Validate Gareko
+        $request->validate([
+            "name"  => "required|string|max:255",
+            "email" => "required|email|unique:users,email"
+        ]);
+
+        // Store In DataBase
+        $user = User::create([
+            "name"=> $request->name,
+            "email"=> $request->email,
+        ]) ;
+
+        return redirect()->route('index.create')->with("success", "User saved successfully!");
+
+
     }
     public function show($id)
     {
