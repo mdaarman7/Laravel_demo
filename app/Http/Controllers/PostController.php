@@ -42,6 +42,14 @@ class PostController extends Controller
     {
         //show single data
     }
+    public function list()
+    {
+        $users = User::all();
+
+        // Pass data to a view
+        return view('users_list', compact('users'));
+
+    }
     public function edit($id)
     {
         //form edit

@@ -103,3 +103,5 @@ Route::resource('post', PostController::class);   // all routes
 Route::get('/index', [PostController::class, 'create'])->name('index.create');
 Route::post('/index', [PostController::class, 'store'])->name('index.store');
 
+Route::get('/users', [PostController::class, 'list'])->name('users.list');
+    
